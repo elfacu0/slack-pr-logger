@@ -1,0 +1,31 @@
+# dependencies
+node_modules/
+.env
+
+# build directory
+dist/
+build/
+lib/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# misc
+.DS_Store
+
+# local env files
+.env.local
+.env.*.local
+
+# VSCode settings
+.vscode/
+
+# jest coverage
+coverage/
+
+# Google service accounts / credentials
+*.json
+
