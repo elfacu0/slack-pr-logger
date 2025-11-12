@@ -1,0 +1,23 @@
+{
+  "name": "git-slack-pr-logger",
+  "version": "1.0.0",
+  "description": "This project automatically detects pull requests in a specified repository and notifies a designated Slack channel to expedite the review process.  At the end of each day, it also generates a summary report in a Google Sheet for easy tracking and analysis.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hono/node-server": "^1.19.6",
+    "hono": "^4.10.5"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "eslint": "^9.39.1",
+    "prettier": "^3.6.2",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}
