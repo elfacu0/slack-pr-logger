@@ -63,6 +63,7 @@ At the end of each day, it also generates a summary report in a Google Sheet for
 └───────────────────────────────────────────────┘
 ```
 # Tech Stack
+- Node 22
 - TypeScript
 - Hono
 - Cloud Run (Containers)
