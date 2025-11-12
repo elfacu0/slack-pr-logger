@@ -2,7 +2,7 @@
   "name": "git-slack-pr-logger",
   "version": "1.0.0",
   "description": "This project automatically detects pull requests in a specified repository and notifies a designated Slack channel to expedite the review process.  At the end of each day, it also generates a summary report in a Google Sheet for easy tracking and analysis.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc -p tsconfig.json",
