@@ -70,7 +70,8 @@ At the end of each day, it also generates a summary report in a Google Sheet for
 - Google Firestore
 - Google Pub/Sub
 - Google Cloud Scheduler
-- Jest
+- Supertest
+- Vitest
 
 # Integrations
 - GitHub Webhooks
