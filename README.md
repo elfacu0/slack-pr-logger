@@ -72,9 +72,19 @@ At the end of each day, it also generates a summary report in a Google Sheet for
 - Google Cloud Scheduler
 - Supertest
 - Vitest
+- Zod
 
 # Integrations
 - GitHub Webhooks
 - Slack
 - Google Sheets API
 - Google Secret Manager
+
+
+
+# Github SetUp
+1. Go to Setting -> Webhooks
+2. Add your url + /webhook/github
+3. Select Pull Request event
+4. Add secret matching the .env secret
+5. Submit
