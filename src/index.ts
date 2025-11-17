@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 import { verifyGitHubSignature } from "./helper/verifySignature";
+import { PullRequestEventSchema } from "./github/schemas";
 
 const app = new Hono();
 
@@ -18,6 +19,13 @@ app.post("/webhook/github", async (c) => {
   if (!valid) {
     console.warn("❌ Invalid signature for delivery", id);
     return c.text("Invalid signature", 401);
+  }
+
+  const json = JSON.parse(bodyText);
+  const parsed = PullRequestEventSchema.safeParse(json);
+  if (!parsed.success) {
+    console.error("❌ Invalid payload", parsed.error.issues);
+    return c.text("Invalid payload", 400);
   }
 
   console.log("✅ Valid signature for event:", event, "ID:", id);
