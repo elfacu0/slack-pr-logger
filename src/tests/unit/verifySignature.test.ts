@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import crypto from "crypto";
-import { verifyGitHubSignature } from "../github/helper/verifySignature";
+import { verifyGitHubSignature } from "../../github/helper/verifySignature";
 
 describe("verifyGitHubSignature", () => {
   const secret = "testsecret";
