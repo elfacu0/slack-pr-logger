@@ -1,6 +1,6 @@
 import type { z } from "zod";
 
-import { verifyGitHubSignature } from "../helper/verifySignature";
+import { verifyGitHubSignature } from "./helper/verifySignature";
 import { PullRequestEventSchema } from "../github/schemas";
 import { formatPRMessage } from "../slack/formatPRMessage";
 import { sendSlackMessage } from "../slack/sendMessage";
