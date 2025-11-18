@@ -23,7 +23,7 @@ describe("GitHub Webhook Handler", () => {
     });
     global.fetch = fetchMock;
 
-    const body = JSON.stringify({
+    const prPayload = {
       action: "opened",
       pull_request: {
         id: 1,
@@ -36,7 +36,9 @@ describe("GitHub Webhook Handler", () => {
         name: "repo",
         full_name: "user/repo",
       },
-    });
+    };
+    const encoded = encodeURIComponent(JSON.stringify(prPayload));
+    const body = `payload=${encoded}`;
 
     const req = new Request(webhookUrl, {
       method: "POST",
@@ -61,6 +63,7 @@ describe("GitHub Webhook Handler", () => {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        "x-github-event": "pull_request",
         "x-hub-signature-256": "sha256=invalid",
       },
       body,

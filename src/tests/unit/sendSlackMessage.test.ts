@@ -33,7 +33,7 @@ describe("sendSlackMessage", () => {
       sendSlackMessage("https://slack.test/w", {
         text: "Hi",
         attachments: [],
-      })
+      }),
     ).rejects.toThrow();
   });
 });
