@@ -3,7 +3,7 @@ import { PullRequestEventSchema } from "../github/schemas";
 import { SlackPRMessage } from "./interfaces/slackPrMessage.interface";
 
 export function formatPRMessage(
-  event: z.infer<typeof PullRequestEventSchema>
+  event: z.infer<typeof PullRequestEventSchema>,
 ): SlackPRMessage {
   const pr = event.pull_request;
 

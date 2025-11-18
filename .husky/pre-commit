@@ -1,0 +1,9 @@
+
+echo "✨ Running Prettier..."
+npx prettier --write .
+
+echo "🔍 Running ESLint..."
+npx eslint . --ext ts || { echo "❌ ESLint failed"; exit 1; }
+
+echo "📦 Running TypeScript type check..."
+tsc --noEmit

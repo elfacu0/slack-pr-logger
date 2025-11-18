@@ -2,7 +2,7 @@ import { SlackPRMessage } from "./interfaces/slackPrMessage.interface";
 
 export async function sendSlackMessage(
   webhookUrl: string,
-  message: SlackPRMessage
+  message: SlackPRMessage,
 ) {
   const res = await fetch(webhookUrl, {
     method: "POST",

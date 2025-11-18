@@ -10,7 +10,7 @@ import crypto from "crypto";
 export function verifyGitHubSignature(
   secret: string,
   payload: string,
-  signatureHeader?: string
+  signatureHeader?: string,
 ): boolean {
   if (!signatureHeader) return false;
   if (!signatureHeader.startsWith("sha256=")) return false;
