@@ -1,0 +1,10 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🔍 Running lint..."
+npm run lint || { echo "❌ Lint failed"; exit 1; }
+
+echo "🧪 Running tests..."
+npm test || { echo "❌ Tests failed"; exit 1; }
+
+echo "✅ All good, pushing..."
