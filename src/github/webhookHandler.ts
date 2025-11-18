@@ -20,12 +20,13 @@ function isValidSignature(bodyText: string, signature: string | undefined) {
 }
 
 function parsePullRequestEventSchema(bodyText: string) {
-  const json = JSON.parse(bodyText);
+  const decodedBody = decodeURIComponent(bodyText.split("=")[1]);
+  const json = JSON.parse(decodedBody);
   return PullRequestEventSchema.safeParse(json);
 }
 
 async function handlePullRequestEvent(
-  event: z.infer<typeof PullRequestEventSchema>
+  event: z.infer<typeof PullRequestEventSchema>,
 ) {
   const webhookUrl = process.env.SLACK_WEBHOOK_URL!;
   const slackMessage = formatPRMessage(event);
@@ -36,6 +37,7 @@ async function handlePullRequestEvent(
 export const webhookHandler = async (c: Context) => {
   const { signature, eventType, id, bodyText } =
     await getRequestHeadersAndBody(c);
+  if (eventType !== "pull_request") return;
 
   if (!isValidSignature(bodyText, signature)) {
     console.warn("❌ Invalid signature for delivery", id);
@@ -48,9 +50,7 @@ export const webhookHandler = async (c: Context) => {
     return c.text("Invalid payload", 400);
   }
 
-  if (eventType === "pull_request") {
-    await handlePullRequestEvent(parsed.data);
-  }
+  await handlePullRequestEvent(parsed.data);
 
   console.log("✅ Valid signature for event:", eventType, "ID:", id);
   return c.json({ ok: true }, 202);
