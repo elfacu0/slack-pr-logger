@@ -119,7 +119,7 @@ At the end of each day, it also generates a summary report in a Google Sheet for
    Example:
 
    ```bash
-   npx ngrok http 3000
+   ngrok http 8080
    ```
 
    This will give you a forwarding URL. Use this (e.g., `https://abcd1234.ngrok.io`) as the base URL for GitHub webhook setup.
