@@ -11,6 +11,7 @@ it("calls Firestore helpers with correct arguments and passes PR object", async 
     url: "http://example.com",
     author: "john",
     action: "opened",
+    date: "2020/10/10",
   };
 
   await expect(savePullRequest(testPr)).resolves.toBeUndefined();
