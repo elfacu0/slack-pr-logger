@@ -35,6 +35,7 @@ async function storePr(event: z.infer<typeof PullRequestEventSchema>) {
     repo: event.repository.full_name,
     title: event.pull_request.title,
     url: event.pull_request.html_url,
+    date: new Date().toISOString(),
   };
   await savePullRequest(prToSave);
 }
