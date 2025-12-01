@@ -1,5 +1,6 @@
 import crypto from "crypto";
 import { describe, it, expect, vi } from "vitest";
+import "../mocks/firestore";
 import app from "../../index";
 import { config as dotenvConfig } from "dotenv";
 dotenvConfig({ path: ".env.test" });
