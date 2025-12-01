@@ -5,4 +5,5 @@ export interface PRInterface {
   repo: string;
   title: string;
   url: string;
+  date: string;
 }
