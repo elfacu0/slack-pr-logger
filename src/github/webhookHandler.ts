@@ -5,6 +5,8 @@ import { PullRequestEventSchema } from "../github/schemas";
 import { formatPRMessage } from "../slack/formatPRMessage";
 import { sendSlackMessage } from "../slack/sendMessage";
 import type { Context } from "hono";
+import { savePullRequest } from "../storage/storage";
+import type { PRInterface } from "./interfaces/pr.interface";
 
 async function getRequestHeadersAndBody(c: Context) {
   const signature = c.req.header("x-hub-signature-256");
@@ -25,12 +27,25 @@ function parsePullRequestEventSchema(bodyText: string) {
   return PullRequestEventSchema.safeParse(json);
 }
 
+async function storePr(event: z.infer<typeof PullRequestEventSchema>) {
+  const prToSave: PRInterface = {
+    action: event.action,
+    author: event.pull_request.user.login,
+    id: event.pull_request.id,
+    repo: event.repository.full_name,
+    title: event.pull_request.title,
+    url: event.pull_request.html_url,
+  };
+  await savePullRequest(prToSave);
+}
+
 async function handlePullRequestEvent(
   event: z.infer<typeof PullRequestEventSchema>,
 ) {
   const webhookUrl = process.env.SLACK_WEBHOOK_URL!;
   const slackMessage = formatPRMessage(event);
   await sendSlackMessage(webhookUrl, slackMessage);
+  await storePr(event);
   console.log("📨 Sent PR event to Slack.");
 }
 
