@@ -86,10 +86,53 @@ At the end of each day, it also generates a summary report in a Google Sheet for
 - Google Sheets API
 - Google Secret Manager
 
-# Github SetUp
+# Running the Project Locally
 
-1. Go to Setting -> Webhooks
-2. Add your url + /webhook/github
-3. Select Pull Request event
-4. Add secret matching the .env secret
-5. Submit
+1. **Install dependencies:**
+
+   ```bash
+   npm install
+   ```
+
+2. **Configure environment variables:**
+
+   - Copy `.env.example` to `.env` and fill in the necessary secrets (GitHub webhook secret, Slack webhook URL, Firestore config, etc.).
+
+3. **Start the server:**
+
+   To run in development mode with hot reload:
+
+   ```bash
+   npm run dev
+   ```
+
+   To run in production mode:
+
+   ```bash
+   npm run start
+   ```
+
+4. **Expose your local server to the Internet (for GitHub webhooks):**
+
+   GitHub webhooks require a public URL. You can use a tool like [ngrok](https://ngrok.com/) to tunnel your local server.
+
+   Example:
+
+   ```bash
+   ngrok http 8080
+   ```
+
+   This will give you a forwarding URL. Use this (e.g., `https://abcd1234.ngrok.io`) as the base URL for GitHub webhook setup.
+
+# GitHub SetUp
+
+1. Go to **Settings** → **Webhooks** in your GitHub repository.
+2. Add your URL + `/webhook/github` (e.g., `https://abcd1234.ngrok.io/webhook/github`).
+3. Select the **Pull Request** event.
+4. Add the secret matching your `.env` secret.
+5. Submit.
+
+# Notes
+
+- Make sure your local server remains running and the ngrok tunnel is active for GitHub to deliver webhook events to your machine.
+- Logs, errors, and incoming webhook events will appear in your terminal.
