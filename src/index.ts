@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { webhookHandler } from "./github/webhookHandler";
 import { generateReportForDate } from "./reports/generateReport";
+import { handleStoreReport } from "./google-sheets/handleStoreReport";
 
 const app = new Hono();
 
@@ -17,5 +18,7 @@ app.get("/reports", async (c) => {
   }
   return c.json(result, 200);
 });
+
+app.post("/reports/store", handleStoreReport);
 
 export default app;
