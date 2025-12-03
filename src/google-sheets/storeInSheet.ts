@@ -15,7 +15,7 @@ export async function storeReportInSheet(report: ReportResult): Promise<void> {
     !fs.existsSync(SERVICE_ACCOUNT_FILE)
   ) {
     throw new Error(
-      "Missing Google Sheet configuration or service account file."
+      "Missing Google Sheet configuration or service account file.",
     );
   }
 
