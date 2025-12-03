@@ -25,3 +25,5 @@ pnpm-debug.log*
 
 # jest coverage
 coverage/
+
+sheet-account.json
