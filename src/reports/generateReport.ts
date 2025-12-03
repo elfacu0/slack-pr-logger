@@ -1,7 +1,23 @@
+import { PRInterface } from "../github/interfaces/pr.interface";
 import { getPullRequestsByDate } from "../storage/storage";
 import { generateDailyPrReport } from "./aiReport";
 
-export async function generateReportForDate(date: string) {
+export interface ReportResult {
+  date: string;
+  count: number;
+  prs: PRInterface[];
+  summary: string;
+  status: number;
+}
+
+interface ReportError {
+  error: string;
+  status: number;
+}
+
+export async function generateReportForDate(
+  date: string,
+): Promise<ReportResult | ReportError> {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
     return {
       error: "Invalid date format. Use YYYY-MM-DD.",
