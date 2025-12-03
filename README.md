@@ -95,7 +95,6 @@ At the end of each day, it also generates a summary report in a Google Sheet for
    ```
 
 2. **Configure environment variables:**
-
    - Copy `.env.example` to `.env` and fill in the necessary secrets (GitHub webhook secret, Slack webhook URL, Firestore config, etc.).
 
 3. **Start the server:**
@@ -131,6 +130,38 @@ At the end of each day, it also generates a summary report in a Google Sheet for
 3. Select the **Pull Request** event.
 4. Add the secret matching your `.env` secret.
 5. Submit.
+
+# Google Sheets Setup
+
+To enable your project to read from and write to Google Sheets, it's recommended to use a **Google Service Account**. Follow these steps to set up access:
+
+### 1. Create a Service Account in Google Cloud Platform
+
+1. Go to the [Google Cloud Console](https://console.cloud.google.com/).
+2. Select an existing project or create a new one.
+3. Navigate to **IAM & Admin** > **Service Accounts**.
+4. Click **+ CREATE SERVICE ACCOUNT**.
+5. Enter a name and description for the account.
+6. Assign the **Editor** role (or **Viewer** if you only need read access) to the service account.
+7. After creating the service account, click on it to open its details.
+8. Go to the **Keys** tab and click **Add Key** > **Create new key**.
+9. Select **JSON** and click **Create**. This will download a JSON key file — keep it safe, as you'll need it in your project.
+
+### 2. Share the Google Sheet with the Service Account
+
+1. Open the Google Sheet you wish to access.
+2. Click the **Share** button in the top-right corner.
+3. In the "Share with people and groups" field, enter the service account's email address (found in your downloaded JSON key, e.g., `your-service-account@your-project.iam.gserviceaccount.com`).
+4. Grant **Editor** or **Viewer** access depending on your needs.
+
+**Note:** The service account will not be able to access the sheet until you've shared it with this email address.
+
+### 3. Add the Service Account Credentials to Your Project
+
+- Place the downloaded JSON key file in your project root (e.g., as `sheet-account.json`), or configure the path using the `GOOGLE_SERVICE_ACCOUNT_FILE` environment variable.
+- Ensure your `.env` file contains the correct `GOOGLE_SHEET_ID` (the spreadsheet ID from your Google Sheet's URL).
+
+That's it! Your app can now access and modify the shared Google Sheet programmatically using the provided service account credentials.
 
 # Notes
 
